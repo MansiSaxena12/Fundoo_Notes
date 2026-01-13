@@ -1,0 +1,155 @@
+/* ---------- RESET ---------- */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- WRAPPER ---------- */
+.signup-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+/* ---------- CARD ---------- */
+.signup-card {
+  width: 900px;
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  gap: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- LEFT ---------- */
+.signup-left {
+  flex: 1;
+}
+
+.brand {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.signup-left h2 {
+  margin-bottom: 24px;
+  font-weight: 500;
+  color: black;
+  text-align: left;
+}
+
+.signup-left h2 span {
+  color: #1a73e8;
+}
+
+.signup-left form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* rows */
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+/* MUI full width */
+.MuiTextField-root {
+  width: 100%;
+}
+
+/* show password spacing */
+.show-password {
+  margin-top: -8px;
+}
+.show-password .MuiFormControlLabel-label {
+  color: #868383;
+}
+/* ---------- ACTION ROW ---------- */
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Signin instead */
+.link-btn {
+  background: none;
+  border: none;
+  color: #1a73e8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Next button */
+.primary-btn {
+  padding: 8px 28px;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ---------- RIGHT IMAGE ---------- */
+.signup-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.signup-right img {
+  width: 260px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.signup-right p {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-right p span {
+  font-weight: 600;
+}
+
+/* ---------- TABLET ---------- */
+@media (max-width: 1024px) {
+  .signup-card {
+    width: 420px;
+    padding: 24px;
+  }
+
+  .signup-right {
+    display: none;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .signup-wrapper {
+    background: #fff;
+    align-items: flex-start;
+  }
+
+  .signup-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

@@ -17,6 +17,7 @@ import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutl
 import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
 import keep_icon from '../assets/keep_icon.png'
 import MoreIcon from '@mui/icons-material/MoreVert';
+import Tooltip from '@mui/material/Tooltip';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -54,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -139,7 +140,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen}>      
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -161,6 +162,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
         color:"gray",zIndex:(theme)=>theme.zIndex.drawer+1
       }}>
         <Toolbar>
+          <Tooltip title="Main Menu">
           <IconButton onClick={handleToggle}
             size="large"
             edge="start"
@@ -170,6 +172,8 @@ export default function PrimarySearchAppBar({handleToggle}) {
           >
             <MenuIcon />
           </IconButton>
+          </Tooltip>
+          <Tooltip title="Keep">
            <Box
             component="img"
             src={keep_icon}
@@ -182,6 +186,8 @@ export default function PrimarySearchAppBar({handleToggle}) {
             cursor: 'pointer',
           }}
   />
+  </Tooltip>
+           <Tooltip title="Keep">
           <Typography
             variant="h6"
             noWrap
@@ -190,10 +196,13 @@ export default function PrimarySearchAppBar({handleToggle}) {
           >
             Keep
           </Typography>
+          </Tooltip>
           <Search>
-            <SearchIconWrapper>
+            <Tooltip title="Search">
+            <IconButton>
               <SearchIcon />
-            </SearchIconWrapper>
+            </IconButton>
+            </Tooltip>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
@@ -212,27 +221,42 @@ export default function PrimarySearchAppBar({handleToggle}) {
       mr: 3.2,  
     }}
   >
+    <Tooltip title="Refresh">
     <IconButton size="large" color="inherit">
       <RefreshIcon />
     </IconButton>
+    </Tooltip>
 
+    <Tooltip title="List">
     <IconButton size="large" color="inherit">
       <ChecklistRtlIcon />
     </IconButton>
+    </Tooltip>
+
+
+    <Tooltip title="Settings">
     <IconButton size="large" color="inherit">
       <SettingsSuggestOutlinedIcon />
     </IconButton>
+    </Tooltip>
 
     
   </Box>
 
   {/* Account icon */}
+  <Tooltip title="Google app">
   <IconButton size="large" color="inherit">
       <AppsRoundedIcon />
     </IconButton>
+    </Tooltip>
+
+    <Tooltip title="Google account">
   <IconButton size="large" color="inherit">
     <AccountCircle />
   </IconButton>
+  </Tooltip>
+
+
 </Box>
 
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

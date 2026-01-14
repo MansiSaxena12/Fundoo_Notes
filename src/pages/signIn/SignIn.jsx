@@ -7,7 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Link } from "@mui/material";
-import "../../../App.css";
+import "../../App.css";
 
 export default function MultiActionAreaCard() {
   const [formData, setFormData] = useState({

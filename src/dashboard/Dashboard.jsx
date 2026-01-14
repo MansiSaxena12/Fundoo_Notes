@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import PrimarySearchAppBar from '../../navbar';
-import ResponsiveDrawer from '../dashboard/Sidenav';
+import PrimarySearchAppBar from '../componenets/header/navbar';
+import ResponsiveDrawer from '../componenets/sidenavbar/Sidenav';
 
 
 export default function Dashboard() {

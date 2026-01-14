@@ -15,7 +15,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';
 import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
-import keep_icon from '../assets/keep_icon.png'
+import keep_icon from '../../assets/keep_icon.png'
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Tooltip from '@mui/material/Tooltip';
 

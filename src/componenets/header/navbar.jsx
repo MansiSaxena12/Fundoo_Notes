@@ -18,6 +18,10 @@ import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
 import keep_icon from '../../assets/keep_icon.png'
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Tooltip from '@mui/material/Tooltip';
+import { Avatar } from '@mui/material';
+import PopUp from './PopUp';
+import {Popover} from '@mui/material';
+import { useLocation } from "react-router-dom";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -90,24 +94,18 @@ export default function PrimarySearchAppBar({handleToggle}) {
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+    <Popover
+        id={menuId}
+        open={isMenuOpen}
+        anchorEl={anchorEl}
+        onClose={handleMenuClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+       <PopUp/>
+      </Popover>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -154,6 +152,23 @@ export default function PrimarySearchAppBar({handleToggle}) {
       </MenuItem>
     </Menu>
   );
+  const location = useLocation();
+  const getTitle = () => {
+  switch (location.pathname) {
+    case "/notes":
+    case "/":
+      return "Keep";
+    case "/reminders":
+      return "Reminders";
+    case "/archive":
+      return "Archive";
+    case "/trash":
+      return "Bin";
+    default:
+      return "Keep";
+  }
+};
+
 
   return (
     <Box sx={{ flexGrow: 1,display:'flex' }}>
@@ -194,7 +209,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:-1 }}
           >
-            Keep
+            {(getTitle())}
           </Typography>
           </Tooltip>
           <Search>
@@ -251,8 +266,9 @@ export default function PrimarySearchAppBar({handleToggle}) {
     </Tooltip>
 
     <Tooltip title="Google account">
-  <IconButton size="large" color="inherit">
-    <AccountCircle />
+  <IconButton size="large" color="inherit" onClick={handleProfileMenuOpen}>
+    {/* <AccountCircle /> */}
+    <Avatar sx={{width:30 ,height:30, backgroundColor: 'green'}}>M</Avatar>
   </IconButton>
   </Tooltip>
 

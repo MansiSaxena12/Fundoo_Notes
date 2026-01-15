@@ -9,7 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
+import { useNavigate, useLocation } from "react-router-dom";
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
@@ -74,8 +74,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({open}) {
+   const navigate = useNavigate();      // ✅ hook inside component
+  const location = useLocation(); 
   
-const [selectedItem, setSelectedItem] = React.useState('Notes');
+// const [selectedItem, setSelectedItem] = React.useState('Notes');
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -84,55 +86,72 @@ const [selectedItem, setSelectedItem] = React.useState('Notes');
     setOpen(false);
   };
   const items=[
-    {text:'Notes',icon:<LightbulbOutlinedIcon/>},
-    {text:'Reminders',icon:<NotificationsOutlinedIcon/>},
+    {text:'Notes',icon:<LightbulbOutlinedIcon/>, path: "notes"},
+    {text:'Reminders',icon:<NotificationsOutlinedIcon/>,path: "reminders"},
     {text:'Edit-labels',icon:<CreateOutlinedIcon/>},
-    {text:'Archieved',icon:<ArchiveOutlinedIcon/>},
-    {text:'Trash',icon:<DeleteOutlineOutlinedIcon/>}
+    {text:'Archive',icon:<ArchiveOutlinedIcon/>,path: "archive"},
+    {text:'Bin',icon:<DeleteOutlineOutlinedIcon/>,path: "trash"}
 ]
 
   return (
-    <Box sx={{ display: 'flex' ,mt:`4`}}>
-      <CssBaseline />
-      <Drawer variant="permanent" open={open} 
-       sx={{ '& .MuiDrawer-paper': {borderRight:`none`,top:`64px`,
-      width: open ? 240 : 65, transition: 'width 0.3s'},}}>
-        {/* <DrawerHeader/> */}
-        <Divider />
-        <List >
-            {items.map((item)=>(
-                <ListItem key={item.text} disablePadding sx={{display:`block`}}>
-                    <ListItemButton
-                    onClick={() => setSelectedItem(item.text)}
-                    sx={{
-                        minHeight:48,
-                        minWidth: 38, 
-                        justifyContent:'flex-start',
-                        px:1.2,
-                        borderRadius:'0 25px 25px 0',
-                        
-                        backgroundColor: selectedItem === item.text ? 'rgb(254, 239, 195)' : 'transparent',
-                          '&:hover': {
-                            background:'rgb(254, 239, 195)'
-                        }
-                    }}
-                    >
-                <ListItemIcon
+  <Box sx={{ display: "flex", mt: 4 }}>
+    <CssBaseline />
+
+    <Drawer
+      variant="permanent"
+      open={open}
+      sx={{
+        "& .MuiDrawer-paper": {
+          borderRight: "none",
+          top: "64px",
+          width: open ? 240 : 65,
+          transition: "width 0.3s",
+        },
+      }}
+    >
+      <Divider />
+
+      <List>
+        {items.map((item) => {
+          // ✅ THIS LINE replaces selectedItem logic
+          const isActive =
+            item.path === "/notes"
+              ? location.pathname === "/" ||
+                location.pathname === "/notes"
+              : location.pathname === item.path;
+
+          return (
+            <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                onClick={() => navigate(item.path)}
                 sx={{
-                  
-                  justifyContent: 'center',
-                }}>
-                 {item.icon}
-              </ListItemIcon>
-                   <ListItemText
-                primary={item.text}
-                sx={{ opacity: 1 }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-              </List>
-      </Drawer>
-    </Box>
-  );
+                  minHeight: 48,
+                  minWidth: 38,
+                  justifyContent: "flex-start",
+                  px: 1.2,
+                  borderRadius: "0 25px 25px 0",
+
+                  backgroundColor: isActive
+                    ? "rgb(254, 239, 195)"
+                    : "transparent",
+
+                  "&:hover": {
+                    background: "rgb(254, 239, 195)",
+                  },
+                }}
+              >
+                <ListItemIcon sx={{ justifyContent: "center" }}>
+                  {item.icon}
+                </ListItemIcon>
+
+                <ListItemText primary={item.text} sx={{ opacity: 1 }} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+    </Drawer>
+  </Box>
+);
+
 }

@@ -6,6 +6,7 @@ import Archive from "./componenets/archive/Archive";
 import Trash from "./componenets/trash/Trash";
 import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signup/Signup";
+import NotesContainer from "./componenets/notes/NotesContainer";
 
 export default function ReactRouting() {
   return (
@@ -18,8 +19,8 @@ export default function ReactRouting() {
 
     
         <Route path="/" element={<Dashboard />}>
-          <Route index element={<Notes />} />
-          <Route path="notes" element={<Notes />} />
+          <Route index element={<NotesContainer />} />
+          <Route path="notes" element={<NotesContainer />} />
           <Route path="reminders" element={<Reminders />} />
           <Route path="archive" element={<Archive />} />
           <Route path="trash" element={<Trash />} />

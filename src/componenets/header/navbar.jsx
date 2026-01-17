@@ -93,6 +93,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
   };
 
   const menuId = 'primary-search-account-menu';
+  const color='darkgreen';
   const renderMenu = (
     <Popover
         id={menuId}
@@ -104,7 +105,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
           horizontal: 'left',
         }}
       >
-       <PopUp/>
+       <PopUp color={color} w={80} h= {80}/>
       </Popover>
   );
 
@@ -199,6 +200,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
             ml: -2,
             mr: 2,
             cursor: 'pointer',
+            display:((getTitle())=='Keep'? 'block':'none'),
           }}
   />
   </Tooltip>
@@ -268,7 +270,7 @@ export default function PrimarySearchAppBar({handleToggle}) {
     <Tooltip title="Google account">
   <IconButton size="large" color="inherit" onClick={handleProfileMenuOpen}>
     {/* <AccountCircle /> */}
-    <Avatar sx={{width:30 ,height:30, backgroundColor: 'green'}}>M</Avatar>
+    <Avatar sx={{width:30 ,height:30, backgroundColor: color}}>M</Avatar>
   </IconButton>
   </Tooltip>
 

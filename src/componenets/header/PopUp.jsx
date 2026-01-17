@@ -11,7 +11,7 @@ const ActionButton = styled(Button)(({ theme }) => ({
   '&:hover': { backgroundColor: '#e8eaed' },
 }));
 
-const Popup = () => {
+const Popup = (props) => {
   const navigate=useNavigate()
   const handleSignout=()=>{
     navigate("/signin");
@@ -24,7 +24,7 @@ const Popup = () => {
 
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1.5 }}>
         <Box sx={{ position: 'relative' }}>
-          <Avatar sx={{ width: 80, height: 80, bgcolor: 'yellow', fontSize: 32 }}>M</Avatar>
+          <Avatar sx={{ width: props.w, height: props.h, background: props.color, fontSize: 32 }}>M</Avatar>
           <Box sx={{ position: 'absolute', bottom: 0, right: 0, bgcolor: 'white', borderRadius: '50%', p: 0.5, boxShadow: 1, display: 'flex' }}>
             <CameraAlt sx={{ fontSize: 14, color: '#5f6368' }} />
           </Box>

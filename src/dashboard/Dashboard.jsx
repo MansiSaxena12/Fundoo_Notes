@@ -23,7 +23,7 @@ export default function Dashboard() {
         <SideNav open={drawerOpen} />
 
         {/* MAIN CONTENT */}
-        <Box sx={{ flexGrow: 1, p: 3 }}>
+        <Box sx={{ flexGrow: 1, p: 3,   display: "flex", flexDirection: "row", justifyContent:'center' }}>
           <Outlet />
         </Box>
       </Box>

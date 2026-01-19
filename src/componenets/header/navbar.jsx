@@ -9,7 +9,8 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import SplitscreenOutlinedIcon from '@mui/icons-material/SplitscreenOutlined';
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import Tooltip from "@mui/material/Tooltip";
@@ -151,7 +152,7 @@ export default function PrimarySearchAppBar({ handleToggle }) {
 
           <Tooltip title="List">
             <IconButton sx={iconButtonSx} color="inherit">
-              <ChecklistRtlIcon />
+              <SplitscreenOutlinedIcon />
             </IconButton>
           </Tooltip>
 

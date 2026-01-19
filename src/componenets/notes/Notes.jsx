@@ -7,9 +7,9 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import { useState } from "react";
 import ShowIcon from "./ShowIcon";
 import { ResetTv } from "@mui/icons-material";
+import Masonry from '@mui/lab/Masonry';
 
 export default function Notes({ addNote }) {
-  // console.log("addNote prop:", typeof addNote);
   const [isExpanded, setExpanded] = useState(false);
   const [bgColor, setColor] = useState("#fff")
   const [title, setTitle] = useState("");
@@ -43,15 +43,16 @@ export default function Notes({ addNote }) {
           elevation={5}
           sx={{
             width: 600,
-            maxWidth:900,
+            maxWidth: 900,    
             display: "flex",
             flexDirection: "column",
             px: 2,
-            py: 1,
+            top: 20,
+            left:20,
+            bottom:1,
             borderRadius: 2,
-            mt: -30,
-            ml: -20,
-            backgroundColor: bgColor
+            backgroundColor: bgColor,
+            position:"relative"
           }}
         >
           {/* ───── TITLE (only when expanded) ───── */}
@@ -62,19 +63,22 @@ export default function Notes({ addNote }) {
               onChange={(e) => setTitle(e.target.value)}
               fullWidth
               variant="standard"
-              InputProps={{ disableUnderline: true }}
+              InputProps={{ disableUnderline: true,
+                sx:{backgroundColor:"inherit"}
+               }}
               sx={{ mb: 1 }}
             />
           )}
 
           {/* ───── INPUT ROW ───── */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "flex-sart" }}>
             <InputBase
               value={content}
               onChange={(e) => setContent(e.target.value)}
               onClick={() => setExpanded(true)}
+              multiline
               placeholder="Take a note..."
-              sx={{ flex: 1, fontSize: 18 }}
+              sx={{ flex: 1, fontSize: 18, backgroundColor:"inherit" }}
             />
 
             {/* Icons visible ONLY when collapsed */}

@@ -26,7 +26,7 @@ const Popup = (props) => {
         <Box sx={{ position: 'relative' }}>
           <Avatar sx={{ width: props.w, height: props.h, background: props.color, fontSize: 32 }}>M</Avatar>
           <Box sx={{ position: 'absolute', bottom: 0, right: 0, bgcolor: 'white', borderRadius: '50%', p: 0.5, boxShadow: 1, display: 'flex' }}>
-            <CameraAlt sx={{ fontSize: 14, color: '#5f6368' }} />
+           
           </Box>
         </Box>
       </Box>
@@ -46,9 +46,7 @@ const Popup = (props) => {
         </ActionButton>
       </Stack>
 
-      <Typography variant="caption" sx={{ display: 'block', mt: 2, color: '#5f6368' }}>
-        Privacy Policy • Terms of Service
-      </Typography>
+     
     </Paper>
   );
 };

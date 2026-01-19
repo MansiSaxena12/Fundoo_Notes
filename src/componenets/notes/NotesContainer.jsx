@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NoteCard from "./NotesCard";
 import { Box } from "@mui/material";
 import Notes from "./Notes";
+import Masonry from '@mui/lab/Masonry';
 
 export default function NotesContainer() {
   const [notes, setNotes] = useState([]);
@@ -23,16 +24,16 @@ const archiveNote = (noteToArchive) => {
   console.log("Archived:", noteToArchive);
 };
   return (
-    <Box >
+    <Box sx={{width:"100%", maxWidth:"650px", px:2,}}>
       <Notes addNote={addNote} />
 
-      <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", flexDirection:"row",justifyContent: "flex-start",
+      <Masonry sx={{ display: "flex", gap: 2, flexWrap: "wrap", flexDirection:"column",justifyContent: "flex-start",
     alignItems: "flex-start", maxWidth: "900px",mx: "auto",  mt: 2,px:3,ml:-30}}>
         {notes.map((note) => (
           <NoteCard key={note.id} note={note} 
           onArchive={archiveNote} />
         ))}
-      </Box>
+      </Masonry>
     </Box>
   );
 }

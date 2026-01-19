@@ -6,6 +6,7 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 // import NotesContainer from "./NotesContainer";
 import { useState } from "react";
 import ShowIcon from "./ShowIcon";
+import { ResetTv } from "@mui/icons-material";
 
 export default function Notes({ addNote }) {
   // console.log("addNote prop:", typeof addNote);
@@ -16,8 +17,11 @@ export default function Notes({ addNote }) {
 
   const handleClose = () => {
     if (!title && !content) {
-      setExpanded(false)
-      return alert("Title and content is required");
+      setTitle("");
+    setContent("");
+    setColor("#fff");
+    setExpanded(false);
+      return
     }
 
     addNote({
@@ -39,6 +43,7 @@ export default function Notes({ addNote }) {
           elevation={5}
           sx={{
             width: 600,
+            maxWidth:900,
             display: "flex",
             flexDirection: "column",
             px: 2,
@@ -100,7 +105,7 @@ export default function Notes({ addNote }) {
             >
               <ShowIcon setColor={setColor} />
 
-              <Typography
+              <Typography component="span"
                 onClick={handleClose}
 
                 sx={{ cursor: "pointer", fontSize: 14, fontWeight: 500 }}

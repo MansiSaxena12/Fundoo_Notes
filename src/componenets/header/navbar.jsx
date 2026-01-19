@@ -1,299 +1,194 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';
-import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
-import keep_icon from '../../assets/keep_icon.png'
-import MoreIcon from '@mui/icons-material/MoreVert';
-import Tooltip from '@mui/material/Tooltip';
-import { Avatar } from '@mui/material';
-import PopUp from './PopUp';
-import {Popover} from '@mui/material';
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
+import Tooltip from "@mui/material/Tooltip";
+import { Avatar, Popover } from "@mui/material";
+import keep_icon from "../../assets/keep_icon.png";
+import PopUp from "./PopUp";
 import { useLocation } from "react-router-dom";
 
+/* ---------------- CONSTANTS ---------------- */
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const NAVBAR_HEIGHT = 64;
+
+const iconButtonSx = {
+  width: 48,
+  height: 48,
+};
+
+/* ---------------- SEARCH ---------------- */
+
+const Search = styled("div")(() => ({
+  position: "relative",
   borderRadius: 8,
-  backgroundColor: alpha('#000', 0.08),
-  '&:hover': {
-    backgroundColor: alpha('#000', 0.11),
-  },
-
-  height:`49.7px`,
-
-  marginLeft: theme.spacing(9),
-  marginRight: theme.spacing(-3),
-  
+  backgroundColor: alpha("#000", 0.08),
+  height: 48,
+  marginLeft: 24,
   flexGrow: 1,
-  maxWidth: '650px' ,
-  display:'flex',
-  alignItems:'center'
+  maxWidth: 650,
+  display: "flex",
+  alignItems: "center",
 }));
 
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '80vh',
-    },
+const StyledInputBase = styled(InputBase)(() => ({
+  color: "inherit",
+  width: "100%",
+  "& .MuiInputBase-input": {
+    padding: "8px",
   },
 }));
 
-export default function PrimarySearchAppBar({handleToggle}) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+/* ---------------- COMPONENT ---------------- */
 
+export default function PrimarySearchAppBar({ handleToggle }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  const color = "darkgreen";
 
-  const menuId = 'primary-search-account-menu';
-  const color='darkgreen';
   const renderMenu = (
     <Popover
-        id={menuId}
-        open={isMenuOpen}
-        anchorEl={anchorEl}
-        onClose={handleMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-       <PopUp color={color} w={80} h= {80}/>
-      </Popover>
+      open={isMenuOpen}
+      anchorEl={anchorEl}
+      onClose={handleMenuClose}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    >
+      <PopUp color={color} w={80} h={80} />
+    </Popover>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-    
-      <MenuItem>
-       <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AppsRoundedIcon />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>      
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
   const location = useLocation();
   const getTitle = () => {
-  switch (location.pathname) {
-    case "/notes":
-    case "/":
-      return "Keep";
-    case "/reminders":
-      return "Reminders";
-    case "/archive":
-      return "Archive";
-    case "/trash":
-      return "Bin";
-    default:
-      return "Keep";
-  }
-};
-
+    switch (location.pathname) {
+      case "/notes":
+      case "/":
+        return "Keep";
+      case "/reminders":
+        return "Reminders";
+      case "/archive":
+        return "Archive";
+      case "/trash":
+        return "Bin";
+      default:
+        return "Keep";
+    }
+  };
 
   return (
-    <Box sx={{ flexGrow: 1,display:'flex' }}>
-      <AppBar position="fixed"
-      sx={{backgroundColor: "#ffffff",
-        color:"gray",zIndex:(theme)=>theme.zIndex.drawer+1
-      }}>
-        <Toolbar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "#ffffff",
+          color: "gray",
+          height: NAVBAR_HEIGHT,
+          justifyContent: "center",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+      >
+        <Toolbar
+          disableGutters
+          sx={{
+            minHeight: NAVBAR_HEIGHT,
+            px: 2,
+          }}
+        >
+          {/* LEFT */}
           <Tooltip title="Main Menu">
-          <IconButton onClick={handleToggle}
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+            <IconButton
+              onClick={handleToggle}
+              color="inherit"
+              sx={iconButtonSx}
+            >
+              <MenuIcon />
+            </IconButton>
           </Tooltip>
-          <Tooltip title="Keep">
-           <Box
+
+          <Box
             component="img"
             src={keep_icon}
             alt="Keep logo"
-            sx={{
-            height: 32,
-            width: 'auto',
-            ml: -2,
-            mr: 2,
-            cursor: 'pointer',
-            display:((getTitle())=='Keep'? 'block':'none'),
-          }}
-  />
-  </Tooltip>
-           <Tooltip title="Keep">
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:-1 }}
-          >
-            {(getTitle())}
-          </Typography>
-          </Tooltip>
+            sx={{ height: 32, ml: 1, mr: 2 }}
+          />
+
+          <Typography variant="h6">{getTitle()}</Typography>
+
+          {/* SEARCH (ALWAYS SAME SIZE) */}
           <Search>
-            <Tooltip title="Search">
-            <IconButton>
+            <IconButton sx={iconButtonSx}>
               <SearchIcon />
             </IconButton>
-            </Tooltip>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              size='25vh'
-            />
+            <StyledInputBase placeholder="Search…" />
           </Search>
+
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex', alignItems: 'center' } }}>
-  
-  {/* Grouped icons */}
-  <Box
-    className="right-icons"
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      mr: 3.2,  
-    }}
-  >
-    <Tooltip title="Refresh">
-    <IconButton size="large" color="inherit">
-      <RefreshIcon />
-    </IconButton>
-    </Tooltip>
 
-    <Tooltip title="List">
-    <IconButton size="large" color="inherit">
-      <ChecklistRtlIcon />
-    </IconButton>
-    </Tooltip>
-
-
-    <Tooltip title="Settings">
-    <IconButton size="large" color="inherit">
-      <SettingsSuggestOutlinedIcon />
-    </IconButton>
-    </Tooltip>
-
-    
-  </Box>
-
-  {/* Account icon */}
-  <Tooltip title="Google app">
-  <IconButton size="large" color="inherit">
-      <AppsRoundedIcon />
-    </IconButton>
-    </Tooltip>
-
-    <Tooltip title="Google account">
-  <IconButton size="large" color="inherit" onClick={handleProfileMenuOpen}>
-    {/* <AccountCircle /> */}
-    <Avatar sx={{width:30 ,height:30, backgroundColor: color}}>M</Avatar>
-  </IconButton>
-  </Tooltip>
-
-
-</Box>
-
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
+          {/* RIGHT ICONS (ALWAYS SAME SIZE) */}
+          <Tooltip title="Refresh">
+            <IconButton sx={iconButtonSx} color="inherit">
+              <RefreshIcon />
             </IconButton>
-          </Box>
+          </Tooltip>
+
+          <Tooltip title="List">
+            <IconButton sx={iconButtonSx} color="inherit">
+              <ChecklistRtlIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Settings">
+            <IconButton sx={iconButtonSx} color="inherit">
+              <SettingsSuggestOutlinedIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Google apps">
+            <IconButton sx={iconButtonSx} color="inherit">
+              <AppsRoundedIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Google account">
+            <IconButton
+              sx={iconButtonSx}
+              color="inherit"
+              onClick={handleProfileMenuOpen}
+            >
+              <Avatar
+                sx={{
+                  width: 32,
+                  height: 32,
+                  fontSize: 14,
+                  backgroundColor: color,
+                }}
+              >
+                M
+              </Avatar>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+
       {renderMenu}
     </Box>
-    
   );
 }

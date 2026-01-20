@@ -48,7 +48,6 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
           wordBreak: "break-word",
           overflowWrap: "anywhere",
 
-          // 🔥 GRID vs LIST behavior
           display: isGrid ? "-webkit-box" : "block",
           WebkitBoxOrient: "vertical",
           WebkitLineClamp: isGrid ? 5 : "none", // grid shows 5 lines

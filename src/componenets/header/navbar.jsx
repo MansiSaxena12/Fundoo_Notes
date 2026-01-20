@@ -127,11 +127,11 @@ export default function PrimarySearchAppBar({ handleToggle, handleToggleView, vi
             </IconButton>
           </Tooltip>
 
-          <Box
+          <Box 
             component="img"
             src={keep_icon}
             alt="Keep logo"
-            sx={{ height: 32, ml: 1, mr: 2 }}
+            sx={{ height: 32, ml: 1, mr: 2 , display:(getTitle()==='Keep')? 'block':'none'}}
           />
 
           <Typography variant="h6">{getTitle()}</Typography>

@@ -15,7 +15,6 @@ export default function Dashboard() {
   };
 
 const handleToggle = () => {
-  console.log("TOGGLE CLICKED →");
   setDrawerOpen((prev) => {
     return !prev;
   });
@@ -37,7 +36,7 @@ const handleToggle = () => {
 
         {/* MAIN CONTENT */}
         <Box sx={{ flexGrow: 1, p: 3,   display: "flex", flexDirection: "row", justifyContent:'center' }}>
-          <Outlet context={view}/>
+          <Outlet context={{view}}/>
         </Box>
       </Box>
       </Box>

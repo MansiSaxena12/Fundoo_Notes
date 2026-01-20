@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Link } from "@mui/material";
 import "../../App.css";
+import api from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function MultiActionAreaCard() {
   const [formData, setFormData] = useState({
@@ -24,7 +26,7 @@ export default function MultiActionAreaCard() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
 
@@ -45,10 +47,26 @@ export default function MultiActionAreaCard() {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      setErrors({});
-      alert("Signed in successfully");
+      try{
+        const res=await api.get(`/user?email=${formData.email}&password=${formData.password}`);
+        if(res.data.length>0){
+          const user =res.data[0];
+          localStorage.setItem('userId',user.id);
+          localStorage.setItem('userName',`${user.firstName}&{user.lastName}`);
+          alert("Login Sucessful");
+          navigate('/');
+        }
+      
+      else{
+        alert("invalid Password");
+      }
+    }
+    catch(err){
+      console.log("Logn Error",err);
+    }
     }
   };
+  const navigate=useNavigate();
 
   return (
     <Box

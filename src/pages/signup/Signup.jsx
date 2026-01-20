@@ -5,6 +5,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Link } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -17,14 +19,14 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange =  (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     let newErrors = {};
 
@@ -51,11 +53,28 @@ const Signup = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      setErrors({});
-      alert("Form submitted successfully");
+      try{
+        const checkUser=await api.get(`/user?email=${formData.email}`);
+        if(checkUser.data.length>0){
+          setErrors({email:"This Email is already registered"});
+          return;
+        }
+        await api.post('/user',{
+          firstName:formData.firstName,
+          lastName:formData.lastName,
+          email:formData.email,
+          password:formData.password
+        });
+        alert("account created successfully");
+        navigate('/');
+      }
+      catch(err){
+        console.error("SignUp Error:",err);
+        alert("Server error Please try again")
+      }
     }
   };
-
+const navigate=useNavigate();
   return (
     <div className="signup-wrapper">
       <div className="signup-card">

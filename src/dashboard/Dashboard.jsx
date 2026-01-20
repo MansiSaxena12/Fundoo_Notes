@@ -7,15 +7,28 @@ import SideNav from "../componenets/sidenavbar/Sidenav";
 
 export default function Dashboard() {
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const[view,setView]=useState("grid")
 
-  const handleToggle = () => {
-    setDrawerOpen((prev) => !prev);
+  
+  const handleToggleView = () => {
+    setView((prev) => (prev === "grid" ? "list" : "grid"));
   };
+
+const handleToggle = () => {
+  console.log("TOGGLE CLICKED →");
+  setDrawerOpen((prev) => {
+    return !prev;
+  });
+};
 
   return (
     <>
       {/* HEADER */}
-      <PrimarySearchAppBar handleToggle={handleToggle} />
+      <Box sx={{display:'flex',flexDirection:'column'}}>
+      <PrimarySearchAppBar
+      handleToggle={handleToggle}
+      handleToggleView={handleToggleView}
+      view={view}/>
 
       {/* BODY */}
       <Box sx={{ display: "flex", mt: "64px" }}>
@@ -24,8 +37,9 @@ export default function Dashboard() {
 
         {/* MAIN CONTENT */}
         <Box sx={{ flexGrow: 1, p: 3,   display: "flex", flexDirection: "row", justifyContent:'center' }}>
-          <Outlet />
+          <Outlet context={view}/>
         </Box>
+      </Box>
       </Box>
     </>
   );

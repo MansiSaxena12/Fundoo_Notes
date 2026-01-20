@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(() => ({
 
 /* ---------------- COMPONENT ---------------- */
 
-export default function PrimarySearchAppBar({ handleToggle }) {
+export default function PrimarySearchAppBar({ handleToggle, handleToggleView, view }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -116,7 +116,10 @@ export default function PrimarySearchAppBar({ handleToggle }) {
           {/* LEFT */}
           <Tooltip title="Main Menu">
             <IconButton
-              onClick={handleToggle}
+              onClick={()=>{
+                console.log("llllll")
+                handleToggle()
+              }}
               color="inherit"
               sx={iconButtonSx}
             >
@@ -150,10 +153,15 @@ export default function PrimarySearchAppBar({ handleToggle }) {
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="List">
-            <IconButton sx={iconButtonSx} color="inherit">
-              <SplitscreenOutlinedIcon />
-            </IconButton>
+          <Tooltip title={view === "grid" ? "List view" : "Grid view"}>
+            <IconButton sx={iconButtonSx} 
+            onClick={handleToggleView}>
+               {view === "grid" ? (
+                 <SplitscreenOutlinedIcon />
+               ) : (
+                 <GridViewOutlinedIcon />
+               )}
+             </IconButton>
           </Tooltip>
 
           <Tooltip title="Settings">

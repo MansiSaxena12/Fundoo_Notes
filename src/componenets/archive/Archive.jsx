@@ -7,9 +7,10 @@ export default function Archive() {
   const [archivedNotes, setArchivedNotes] = useState([]);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("archiveNotes")) || [];
-    setArchivedNotes(stored);
-  }, []);
+  fetch("http://localhost:3001/archive")
+    .then((res) => res.json())
+    .then((data) => setArchivedNotes(data));
+}, []);
 
   if (archivedNotes.length === 0) {
     return (

@@ -1,0 +1,21 @@
+{
+  "user": [
+    {
+      "id": "4115",
+      "firstName": "Mansi",
+      "lastName": "Saxena",
+      "email": "saxenamansi346@gmail.com",
+      "password": "dfghdfgh"
+    },
+    {
+      "id": "96f0",
+      "firstName": "asdfghjkl",
+      "lastName": "asdfghjkl",
+      "email": "ritka.shar31@gmail.com",
+      "password": "asdfasdf"
+    }
+  ],
+  "notes": [],
+  "archive": [],
+  "delete": []
+}

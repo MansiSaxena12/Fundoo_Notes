@@ -38,7 +38,11 @@ export default function Notes({ addNote }) {
   }
   return (
     <ClickAwayListener onClickAway={handleClose}>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1,
+        display: "flex",
+        justifyContent: "flex-start",
+        pl: "120px",
+       }}>
         <Paper
           elevation={5}
           sx={{

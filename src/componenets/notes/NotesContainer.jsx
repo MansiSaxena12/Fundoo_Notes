@@ -45,20 +45,11 @@ export default function NotesContainer() {
   };
   return (
     <Box sx={{ width: "100%", px: 2, }}>
-      {/* <PrimarySearchAppBar
-        // handleToggle={() => {
-        //   console.log("In notes container")
-        
-        // }}
-        handleToggleView={() =>
-          setView((prev) => (prev === "grid" ? "list" : "grid"))
-        }
-        view={view}
-      /> */}
+      
       
       <Notes addNote={addNote} />
 
-      <Masonry columns={view.view === "grid" ? 1 : 3 }
+      <Masonry columns={view.view === "grid" ? 1 : getColumns() }
         spacing={2}
         sx={{
           mt: 2,

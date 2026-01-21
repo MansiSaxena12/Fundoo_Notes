@@ -1,4 +1,4 @@
-import { Box, IconButton, Popover } from "@mui/material";
+import { Box, IconButton, Popover, Tooltip } from "@mui/material";
 import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
@@ -6,15 +6,21 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import PaintPallette from "./PaintPallette";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { updateNoteColorApi } from "../../api/axios";
 import React, { useState } from "react";
 
-export default function ShowIcon({ setColor, onArchive }) {
+export default function ShowIcon({ note, onArchive,onTrash, refreshNotes }) {
   const [paint, setPaint] = useState(null);
   
   const handleOpen = (event) => {
     setPaint(event.currentTarget);
   };
-
+  const changeColor = async (color) => {
+    await updateNoteColorApi(note.id, color);
+     refreshNotes()
+    setPaint(null);
+  };
   const handleClose = () => {
     setPaint(null);
   };
@@ -34,10 +40,7 @@ export default function ShowIcon({ setColor, onArchive }) {
         sx={{ mt: 4.5, ml: 2.2 }}
       >
         <PaintPallette
-          setColor={(color) => {
-            setColor(color);
-            handleClose();
-          }}
+          setColor={changeColor}
         />
       </Popover>
 
@@ -52,12 +55,16 @@ export default function ShowIcon({ setColor, onArchive }) {
       <IconButton size="small">
         <ImageOutlinedIcon fontSize="small" />
       </IconButton>
-
-      {/* 🔑 ARCHIVE ACTION */}
+      
       <IconButton size="small" onClick={onArchive }>
         <ArchiveOutlinedIcon fontSize="small" />
       </IconButton>
-
+      
+        <Tooltip>
+          <IconButton size="small" onClick={onTrash}>
+            <DeleteOutlineIcon fontSize="small"/>
+          </IconButton>
+        </Tooltip>
       <IconButton size="small">
         <MoreVertOutlinedIcon fontSize="small" />
       </IconButton>

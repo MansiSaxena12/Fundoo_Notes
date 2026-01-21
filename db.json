@@ -21,7 +21,32 @@
       "title": "",
       "content": "bdjs cmkj",
       "color": "#fff",
-      "archived": true
+      "archived": false,
+      "trash": true
+    },
+    {
+      "id": "9d13",
+      "title": "dfg",
+      "content": "sdfghjkl",
+      "color": "#f39f76",
+      "archived": false,
+      "trash": false
+    },
+    {
+      "id": "d1ff",
+      "title": "",
+      "content": "dfghjk",
+      "color": "#fff",
+      "archived": true,
+      "trash": false
+    },
+    {
+      "id": "d68a",
+      "title": "",
+      "content": "dfghjk",
+      "color": "#b4ddd3",
+      "archived": false,
+      "trash": true
     }
   ]
 }

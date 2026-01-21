@@ -6,7 +6,7 @@ import Masonry from '@mui/lab/Masonry';
 // import PrimarySearchAppBar from "../header/navbar";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
-import { getArchiveNotes,archiveNoteApi } from "../../api/axios";
+import { getArchiveNotes,unarchiveNoteApi, trashNoteApi } from "../../api/axios";
 // import Archive from "../archive/Archive";
 
 export default function Archive() {
@@ -38,20 +38,24 @@ export default function Archive() {
     fetchNotes();
   }, []);
 
-  const addNote = async (note) => {
-    const { addNoteApi } = await import("../../api/axios");
-    await addNoteApi(note);
+  // const addNote = async (note) => {
+  //   const { addNoteApi } = await import("../../api/axios");
+  //   await addNoteApi(note);
+  //   fetchNotes();
+  // };
+  const unarchiveNote = async (note) => {
+    await unarchiveNoteApi(note.id);
     fetchNotes();
   };
-  const archiveNote = async (note) => {
-    await archiveNoteApi(note.id);
-    fetchNotes();
-  };
+  const trashNote = async (note) => {
+  await trashNoteApi(note.id);
+  fetchNotes();
+};
   return (
     <Box sx={{ width: "100%", px: 2, }}>
       
       
-      <Notes addNote={addNote} />
+      {/* <Notes addNote={addNote} /> */}
 
       <Masonry
         columns={view?.view === "grid" ? 1 : getColumns()}
@@ -59,12 +63,14 @@ export default function Archive() {
         sx={{ mt: 2 }}
       >
         {notes
-          .filter((note) => note.archived)
+          .filter((note) => note.archived && !note.trash)
           .map((note) => (
             <NoteCard
               key={note.id}
               note={note}
-              onArchive={() => archiveNote(note)}
+              onArchive={() => unarchiveNote(note)}
+              onTrash={() => trashNote(note)}
+              refreshNotes={fetchNotes}
             />
           ))}
       </Masonry>

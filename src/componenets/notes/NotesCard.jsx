@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Typography, Box } from "@mui/material";
 import ShowIcon from "./ShowIcon";
 
-export default function NoteCard({ note, onArchive, isGrid = true }) {
-  const [bgColor, setColor] = useState(note.color || "#fff");
+export default function NoteCard({ note, onArchive, onTrash, refreshNotes, isGrid = true }) {
+  // const [bgColor, setColor] = useState(note.color || "#fff");
+  // const bgColor="#fff"
   const [hover, setHover] = useState(false);
-
+// useEffect(() => {
+//   setColor(note.color || "#fff");
+// }, [note.color]);
   return (
     <Paper
       elevation={4}
@@ -14,7 +17,7 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
         p: 2,
         pb: 7,
         borderRadius: 2,
-        backgroundColor: bgColor,
+        backgroundColor: note.color || "#fff",
         position: "relative",
         top: 50,
         display: "flex",
@@ -60,9 +63,12 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
       {hover && (
         <Box sx={{ position: "absolute", bottom: 4, left: 4, right: 4 }}>
           <ShowIcon
-            setColor={(color) => setColor(color)}
-            selectedColor={bgColor}
+            // setColor={(color) => setColor(color)}
+            // selectedColor={bgColor}
+            note={note}
             onArchive={onArchive}
+            onTrash={onTrash}
+            refreshNotes={refreshNotes}
           />
         </Box>
       )}

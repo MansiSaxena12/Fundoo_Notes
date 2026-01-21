@@ -6,7 +6,7 @@ import Masonry from '@mui/lab/Masonry';
 // import PrimarySearchAppBar from "../header/navbar";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
-import { getNotes,archiveNoteApi } from "../../api/axios";
+import { getNotes,archiveNoteApi, trashNoteApi } from "../../api/axios";
 import Archive from "../archive/Archive";
 
 export default function NotesContainer() {
@@ -47,6 +47,10 @@ export default function NotesContainer() {
     await archiveNoteApi(note.id);
     fetchNotes();
   };
+  const trashNote = async (note) => {
+  await trashNoteApi(note.id);
+  fetchNotes();
+};
   return (
     <Box sx={{ width: "100%", px: 2, }}>
       
@@ -59,12 +63,14 @@ export default function NotesContainer() {
         sx={{ mt: 2 }}
       >
         {notes
-          .filter((note) => !note.archived)
+          .filter((note) => !note.archived && !note.trash)
           .map((note) => (
             <NoteCard
               key={note.id}
               note={note}
               onArchive={() => archiveNote(note)}
+              onTrash={() => trashNote(note)}
+              refreshNotes={fetchNotes}
             />
           ))}
       </Masonry>

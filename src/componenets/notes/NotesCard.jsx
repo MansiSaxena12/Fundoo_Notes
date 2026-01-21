@@ -62,7 +62,7 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
           <ShowIcon
             setColor={(color) => setColor(color)}
             selectedColor={bgColor}
-            onArchive={() => onArchive(note)}
+            onArchive={() => onArchive}
           />
         </Box>
       )}

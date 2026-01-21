@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
+import { getNotes, archiveNoteApi, unarchiveNoteApi } from "../api/axios";
 import { Outlet } from "react-router-dom";
 
 import PrimarySearchAppBar from "../componenets/header/navbar";

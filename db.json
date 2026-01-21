@@ -15,7 +15,15 @@
       "password": "asdfasdf"
     }
   ],
-  "notes": [],
+  "notes": [
+    {
+      "id":1,
+      "title":"Hello",
+      "content":"Hello world",
+      "archived":true,
+      "color":"#ffffff"
+    }
+  ],
   "archive": [],
   "delete": []
 }

@@ -1,45 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import NoteCard from "../notes/NotesCard";
-import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
+import { Box } from "@mui/material";
+import Notes from "../notes/Notes";
+import Masonry from '@mui/lab/Masonry';
+// import PrimarySearchAppBar from "../header/navbar";
+import { useTheme, useMediaQuery } from "@mui/material";
+import { useOutletContext } from "react-router-dom";
+import { getArchiveNotes,archiveNoteApi } from "../../api/axios";
+// import Archive from "../archive/Archive";
 
 export default function Archive() {
-  const [archivedNotes, setArchivedNotes] = useState([]);
+  const [notes, setNotes] = useState([]);
+  // const [view, setView] = useState("grid");
+  const view=useOutletContext();
+  const theme = useTheme();
 
-  useEffect(() => {
-  fetch("http://localhost:3001/archive")
-    .then((res) => res.json())
-    .then((data) => setArchivedNotes(data));
-}, []);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isLaptop = useMediaQuery(theme.breakpoints.up("lg"));
+  const getColumns = () => {
+    if (view.view === "grid") return 1;
+    // if (view === "grid") return 3;
 
-  if (archivedNotes.length === 0) {
-    return (
-      <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#9e9e9e",
-      }}
-    >
-      {/* Icon */}
-      <ArchiveOutlinedIcon sx={{ fontSize: 96, mb: 2 }} />
+    if (isMobile) return 1; 
+    if (isTablet) return 3;  
+    if (isLaptop) return 4;   
 
-      {/* Text */}
-      <Typography variant="h5">
-        Your archived notes appear here
-      </Typography>
-    </Box>
-    );
-  }
+    return 3;
+  };
 
+    const fetchNotes = async () => {
+    const res = await getArchiveNotes();
+    setNotes(res.data);
+  };
+
+    useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  const addNote = async (note) => {
+    const { addNoteApi } = await import("../../api/axios");
+    await addNoteApi(note);
+    fetchNotes();
+  };
+  const archiveNote = async (note) => {
+    await archiveNoteApi(note.id);
+    fetchNotes();
+  };
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-      {archivedNotes.map((note) => (
-        <NoteCard key={note.id} note={note} />
-      ))}
+    <Box sx={{ width: "100%", px: 2, }}>
+      
+      
+      <Notes addNote={addNote} />
+
+      <Masonry
+        columns={view?.view === "grid" ? 1 : getColumns()}
+        spacing={2}
+        sx={{ mt: 2 }}
+      >
+        {notes
+          .filter((note) => note.archived)
+          .map((note) => (
+            <NoteCard
+              key={note.id}
+              note={note}
+              onArchive={() => archiveNote(note)}
+            />
+          ))}
+      </Masonry>
     </Box>
   );
 }

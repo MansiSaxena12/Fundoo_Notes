@@ -8,7 +8,7 @@ import SideNav from "../componenets/sidenavbar/Sidenav";
 
 export default function Dashboard() {
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const[view,setView]=useState("grid")
+  const[view,setView]=useState("list")
 
   
   const handleToggleView = () => {

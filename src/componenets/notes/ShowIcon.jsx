@@ -22,6 +22,7 @@ export default function ShowIcon({ setColor, onArchive }) {
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       {/* Color */}
+      
       <IconButton size="small" onClick={handleOpen}>
         <ColorLensOutlinedIcon fontSize="small" />
       </IconButton>
@@ -53,7 +54,7 @@ export default function ShowIcon({ setColor, onArchive }) {
       </IconButton>
 
       {/* 🔑 ARCHIVE ACTION */}
-      <IconButton size="small" onClick={onArchive}>
+      <IconButton size="small" onClick={onArchive }>
         <ArchiveOutlinedIcon fontSize="small" />
       </IconButton>
 

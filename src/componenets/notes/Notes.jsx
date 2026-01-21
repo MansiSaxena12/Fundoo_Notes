@@ -25,7 +25,7 @@ export default function Notes({ addNote }) {
     }
 
     addNote({
-      id: Date.now(),
+      // id: Date.now(),
       title,
       content,
       color: bgColor,

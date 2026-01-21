@@ -54,7 +54,7 @@ export default function NotesContainer() {
       <Notes addNote={addNote} />
 
       <Masonry
-        columns={view?.view === "grid" ? 1 : getColumns()}
+        columns={view.view === "grid" ? 1:getColumns()}
         spacing={2}
         sx={{ mt: 2 }}
       >

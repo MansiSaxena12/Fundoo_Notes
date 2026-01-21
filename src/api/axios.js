@@ -14,7 +14,9 @@ export const addNoteApi = (note) =>
 
 export const archiveNoteApi=(id)=>
     axios.patch(`${BASE_URL}/${id}`, {archived:true})
-export default api;
+
 
 export const unarchiveNoteApi = (id) =>
   axios.patch(`${BASE_URL}/${id}`, { archived: false });
+
+export default api;

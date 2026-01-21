@@ -48,10 +48,10 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
           wordBreak: "break-word",
           overflowWrap: "anywhere",
 
-          display: isGrid ? "-webkit-box" : "block",
-          WebkitBoxOrient: "vertical",
-          WebkitLineClamp: isGrid ? 5 : "none", // grid shows 5 lines
-          overflow: isGrid ? "hidden" : "visible",
+          // display: isGrid ? "-webkit-box" : "block",
+          // WebkitBoxOrient: "vertical",
+          // WebkitLineClamp: isGrid ? 5 : "none", // grid shows 5 lines
+          // overflow: isGrid ? "hidden" : "visible",
         }}
       >
         {note.content}
@@ -62,7 +62,7 @@ export default function NoteCard({ note, onArchive, isGrid = true }) {
           <ShowIcon
             setColor={(color) => setColor(color)}
             selectedColor={bgColor}
-            onArchive={() => onArchive}
+            onArchive={onArchive}
           />
         </Box>
       )}

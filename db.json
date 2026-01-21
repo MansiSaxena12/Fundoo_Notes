@@ -17,13 +17,11 @@
   ],
   "notes": [
     {
-      "id":1,
-      "title":"Hello",
-      "content":"Hello world",
-      "archived":true,
-      "color":"#ffffff"
+      "id": "c8bd",
+      "title": "",
+      "content": "bdjs cmkj",
+      "color": "#fff",
+      "archived": true
     }
-  ],
-  "archive": [],
-  "delete": []
+  ]
 }

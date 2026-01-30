@@ -109,16 +109,15 @@ export default function MiniDrawer({open}) {
       <List>
         {items.map((item) => {
           // ✅ THIS LINE replaces selectedItem logic
-          const isActive =
-            item.path === "/notes"
-              ? location.pathname === "/" ||
-                location.pathname === "/notes"
-              : location.pathname === item.path;
-
+         const isActive =
+  item.path === "notes"
+    ? location.pathname === "/" || location.pathname === "/notes"
+    : location.pathname === `/${item.path}`;
+    
           return (
             <ListItem key={item.text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate(item.path)}
+                onClick={() =>  item.path && navigate(item.path)}
                 sx={{
                   minHeight: 48,
                   minWidth: 38,
@@ -131,8 +130,10 @@ export default function MiniDrawer({open}) {
                     : "transparent",
 
                   "&:hover": {
-                    background: "rgb(254, 239, 195)",
-                  },
+                        backgroundColor: isActive
+        ? "rgb(254, 239, 195)"
+        : "#f1f3f4",
+    },
                 }}
               >
                 <ListItemIcon sx={{ justifyContent: "center" }}>

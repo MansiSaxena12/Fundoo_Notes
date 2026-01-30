@@ -7,19 +7,20 @@ import Trash from "./componenets/trash/Trash";
 import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signup/Signup";
 import NotesContainer from "./componenets/notes/NotesContainer";
-
+import { ProtectedRoute } from "./routing/ProtectedRoute";
+import { AuthRoute } from "./routing/AuthRoute";
 
 export default function ReactRouting() {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<AuthRoute><SignIn /></AuthRoute>} />
+        <Route path="/signup" element={<AuthRoute><SignUp /></AuthRoute>} />
         <Route path="/dashboard" element={<Dashboard />} />
 
     
-        <Route path="/" element={<Dashboard />}>
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
           <Route index element={<NotesContainer />} />
           <Route path="notes" element={<NotesContainer />} />
           <Route path="reminders" element={<Reminders />} />

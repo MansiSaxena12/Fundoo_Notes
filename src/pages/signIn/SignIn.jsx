@@ -51,8 +51,7 @@ export default function MultiActionAreaCard() {
         const res=await api.get(`/user?email=${formData.email}&password=${formData.password}`);
         if(res.data.length>0){
           const user =res.data[0];
-          localStorage.setItem('userId',user.id);
-          localStorage.setItem('userName',`${user.firstName}&{user.lastName}`);
+          localStorage.setItem("userData", JSON.stringify(user));
           alert("Login Sucessful");
           navigate('/');
         }

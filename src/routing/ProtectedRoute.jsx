@@ -1,9 +1,17 @@
-// import React from "react";
-// import { Navigate, Outlet } from "react-router-dom";
-// import { isAuthenticated } from "./auth";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-// const ProtectedRoute = () => {
-//   return isAuthenticated() ? <Outlet /> : <Navigate to="/signin" replace />;
-// };
+export const ProtectedRoute = ({ children }) => {
+  const storedJsonString = localStorage.getItem("userData");
+  const storedData = storedJsonString
+    ? JSON.parse(storedJsonString)
+    : null;
 
-// export default ProtectedRoute;
+  // not logged in → go to signin
+  if (!storedData) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  // logged in → allow access
+  return children;
+};

@@ -14,7 +14,12 @@ const ActionButton = styled(Button)(({ theme }) => ({
 const Popup = (props) => {
   const navigate=useNavigate()
   const handleSignout=()=>{
+    localStorage.removeItem("userData");
     navigate("/signin");
+  }
+  const handleSignIn=()=>{
+    localStorage.removeItem("userData");
+    navigate("/signup");
   }
   return (
     <Paper elevation={3} sx={{ width: 350, borderRadius: 7, p: 3, bgcolor: '#f0f4f9', textAlign: 'center', position: 'relative' }}>
@@ -38,7 +43,7 @@ const Popup = (props) => {
       </Button>
 
       <Stack direction="row" spacing={0.5}>
-        <ActionButton fullWidth startIcon={<Add />} sx={{ borderRadius: '24px 4px 4px 24px' }}>
+        <ActionButton onClick={handleSignIn} fullWidth startIcon={<Add />} sx={{ borderRadius: '24px 4px 4px 24px' }}>
           Add account
         </ActionButton>
         <ActionButton onClick={handleSignout} fullWidth startIcon={<Logout />} sx={{ borderRadius: '4px 24px 24px 4px' }}>

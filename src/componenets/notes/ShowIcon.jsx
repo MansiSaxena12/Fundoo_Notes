@@ -10,7 +10,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { updateNoteColorApi } from "../../api/axios";
 import React, { useState } from "react";
 
-export default function ShowIcon({ note, onArchive,onTrash, refreshNotes }) {
+export default function ShowIcon({ note, onArchive,onTrash, refreshNotes,onArchiveDraft, onColorDraft,  }) {
   const [paint, setPaint] = useState(null);
   
   const handleOpen = (event) => {

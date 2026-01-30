@@ -1,9 +1,17 @@
-// import React from "react";
-// import { Navigate, Outlet } from "react-router-dom";
-// import { isAuthenticated } from "./auth";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-// const AuthRoute = () => {
-//   return isAuthenticated() ? <Navigate to="/" replace /> : <Outlet />;
-// };
+export const AuthRoute = ({ children }) => {
+  const storedJsonString = localStorage.getItem("userData");
+  const storedData = storedJsonString
+    ? JSON.parse(storedJsonString)
+    : null;
 
-// export default AuthRoute;
+  // already logged in → block auth pages
+  if (storedData) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  // not logged in → allow signin/signup
+  return children;
+};

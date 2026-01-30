@@ -13,6 +13,13 @@
       "lastName": "asdfghjkl",
       "email": "ritka.shar31@gmail.com",
       "password": "asdfasdf"
+    },
+    {
+      "id": "93f5",
+      "firstName": "Mansi",
+      "lastName": "Hello",
+      "email": "mansi.saxena_cs.da22@gmail.com",
+      "password": "Mansi2004"
     }
   ],
   "notes": [
@@ -28,7 +35,7 @@
       "id": "9d13",
       "title": "dfg",
       "content": "sdfghjkl",
-      "color": "#f39f76",
+      "color": "#faafa8",
       "archived": false,
       "trash": false
     },
@@ -47,6 +54,22 @@
       "color": "#b4ddd3",
       "archived": false,
       "trash": true
+    },
+    {
+      "id": "195d",
+      "title": "",
+      "content": "dfbg",
+      "color": "#e2f6d3",
+      "archived": false,
+      "trash": false
+    },
+    {
+      "id": "85d3",
+      "title": "",
+      "content": "trhtyj",
+      "color": "#fff",
+      "archived": false,
+      "trash": false
     }
   ]
 }
